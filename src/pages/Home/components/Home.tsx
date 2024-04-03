@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
-import axios from "../../../api/axios";
+import "../style/index.css";
+import axios from "@/api/axios";
 
-import taipei101 from "../../../../assets/image/taipei-101.jpg";
-import newTaipei from "../../../../assets/image/new-taipei.jpg";
-import taichung from "../../../../assets/image/taichung.jpg";
-import tainan from "../../../../assets/image/台南.jpg";
-import taoyuan from "../../../../assets/image/桃園.jpg";
-import kaohsiung from "../../../../assets/image/高雄.jpg";
+import taipei101 from "@/assets/image/taipei-101.jpg";
+import newTaipei from "@/assets/image/new-taipei.jpg";
+import taichung from "@/assets/image/taichung.jpg";
+import tainan from "@/assets/image/台南.jpg";
+import taoyuan from "@/assets/image/桃園.jpg";
+import kaohsiung from "@/assets/image/高雄.jpg";
 
 // 輪播圖
-import slide1 from "../../../../assets/image/03.jpg";
-import slide2 from "../../../../assets/image/02.jpg";
-import slide3 from "../../../../assets/image/01.jpg";
+import slide1 from "@/assets/image/03.jpg";
+import slide2 from "@/assets/image/02.jpg";
+import slide3 from "@/assets/image/01.jpg";
 
 function Main() {
   const [currentSlide, setCurrentSlide] = useState(0);
