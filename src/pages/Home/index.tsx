@@ -1,10 +1,10 @@
 import React from "react";
-import Main from "./components/Home/Main.tsx";
+import HomePage from "./components/Home.tsx";
 
 function Home() {
   return (
     <div className="home-container">
-      <Main />
+      <HomePage />
     </div>
   );
 }

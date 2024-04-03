@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
-import axios from "../../../../api/axios";
+import axios from "../../../api/axios";
 
 import taipei101 from "../../../../assets/image/taipei-101.jpg";
 import newTaipei from "../../../../assets/image/new-taipei.jpg";
