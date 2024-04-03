@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./header.css";
 import "./header_login.css";
-import useAuthContext from "../context/AuthContext.tsx";
+import useAuthContext from "@/components/context/AuthContext.tsx";
 // import head from "./img/head.jpg";
-// import loaDing from "/src/loading.gif";
-import LOGO from "../../assets/image/LOGO.png";
-import DarkMode from "../DarkMode/DarkMode.tsx";
-import axios from "../../api/axios.ts";
+import loaDing from "@/assets/image/loading.gif";
+import LOGO from "@/assets/image/LOGO.png";
+import DarkMode from "@/components/DarkMode/DarkMode.tsx";
+import axios from "@/api/axios.ts";
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

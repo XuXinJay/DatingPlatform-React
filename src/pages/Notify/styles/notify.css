@@ -1,0 +1,248 @@
+/* Google Fonts(Poppins) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.home-container {
+  background-color: #f5f5f5;
+}
+
+.change {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--body_background_color);
+}
+
+/* ------------------------ 導覽列補充 ---------------------- */
+
+.home_header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+}
+
+/*--------------------- 主內容 ----------------------*/
+
+.main {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  max-width: 700px;
+  min-width: 380px;
+  border-radius: 20px;
+}
+
+.notify_container {
+  max-width: 968px;
+  width: 90%;
+  padding: 15px;
+  background-color: var(--body_background_color);
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 6rem;
+  color: var(--body_color);
+  margin-bottom: 1rem;
+}
+
+.container .heading {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.container .content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.radio {
+  display: none;
+}
+
+.content .list {
+  display: flex;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.space {
+  width: 130px;
+}
+
+.maintitle {
+  font-weight: bolder;
+}
+
+.content .list label {
+  height: 40px;
+  width: 82px;
+  font-size: 1rem;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 12;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 15px;
+  transition: 0.3s;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.color_box {
+  border: 2px solid #f7c242;
+  width: 90px;
+  height: 40px;
+  top: 40px;
+  position: relative;
+  border-radius: 10px;
+}
+
+#user:checked ~ .color_box {
+  transform: translateX(90px);
+  transition: 0.4s;
+}
+
+#info:checked ~ .color_box {
+  transform: translateX(180px);
+  transition: 0.4s;
+}
+
+.content .text-content {
+  width: 100%;
+  height: 700px;
+  min-width: 320px;
+}
+
+.content .text-content .title {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-weight: bolder;
+}
+
+.content .text-content p {
+  text-align: justify;
+}
+
+.content .text-content .text {
+  display: none;
+}
+
+.content .text-content .text.home {
+  display: block;
+}
+
+.home-btn {
+  background-color: #f7c242;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.home-btn:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+#home:checked ~ .text-content .home,
+#chat:checked ~ .text-content .chat,
+#user:checked ~ .text-content .user,
+#info:checked ~ .text-content .info {
+  display: block;
+}
+
+#chat:checked ~ .text-content .home,
+#user:checked ~ .text-content .home,
+#info:checked ~ .text-content .home {
+  display: none;
+}
+
+/**/
+
+@media screen and (max-width: 768px) {
+  .home_user {
+    display: none;
+  }
+
+  .hamburger-icon {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* -------------------------------------- 公告欄測試 --------------------------------------------- */
+
+.notify_box {
+  height: 88%;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.notify_change_page {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.notify_change_page_li {
+  list-style: none;
+}
+
+.rc-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.notify_table_divbox {
+  width: 100%;
+}
+
+
+.notify_table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ccc;
+}
+
+.notify_table_thead {
+  background-color: #f9da91;
+  color: black;
+}
+
+.notify_tbody_border_RED {
+  border: 1px solid #ccc;
+  padding: 5.5px;
+  color: #ff4500;
+}
+
+
+.notify_tbody_border {
+  border: 1px solid #ccc;
+  padding: 5.5px;
+}
+
+.rc-pagination-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 1rem;
+  text-align: center;
+  margin-right: 2.5px;
+  margin-left: 2.5px;
+}
+
+.rc-pagination-item:hover {
+  cursor: pointer;
+}

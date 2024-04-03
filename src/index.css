@@ -15,6 +15,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --body_background_color: #f5f5f5;
+  --body_background_color_dot: rgba(83, 83, 83, 0.8);
+  --body_color: black;
+  --line_color: black;
 }
 
 a {
@@ -69,4 +74,19 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/*   #293a4c  */
+[data-theme="dark"] {
+  --body_background_color: #293a4c;
+  --body_background_color_white: #f5f5f5;
+  --body_background_color_dot: #f5f5f5;
+  --body_color: #f5f5f5;
+  --line_color: #f5f5f5;
+}
+
+[data-theme="ligth"] {
+  --body_background_color: #23313f;
+
+  --body_color: #f5f5f5;
 }

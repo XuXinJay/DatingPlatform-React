@@ -3,13 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import Footer from "@/components//Footer/Footer.tsx";
+import Header from "@/components/Header/Header.tsx";
 
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <Header />
+    <App />
+    <Footer />
+  </BrowserRouter>
+);
