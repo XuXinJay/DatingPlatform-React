@@ -1,0 +1,364 @@
+/* ----------------------------- 導覽列 ----------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.home_header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  z-index: 999;
+}
+
+.home_header nav .allUl {
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
+.allUl li a {
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-items: center;
+}
+
+.allUl li a:hover {
+  color: #f7c242;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--body_background_color);
+  height: 80px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 5px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.home_title {
+  display: flex;
+  align-items: center;
+}
+
+.home_title:hover {
+  cursor: pointer;
+}
+
+.home_user {
+  border: 2.5px solid #f7c242;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--body_color);
+}
+
+.home_activity {
+  border: 3px solid #f7c242;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--body_color);
+  margin-right: 1rem;
+}
+
+.home_user:hover {
+  background-color: #f7c242;
+  transition: 0.4s;
+}
+
+.home_activity:hover {
+  background-color: #f7c242;
+  transition: 0.4s;
+}
+
+nav ul {
+  width: 100%;
+  text-align: left;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 0.5rem;
+}
+
+nav ul li a {
+  color: var(--body_color);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.uil-user-circle {
+  font-size: 30px;
+}
+
+/* ----------------------------- 提醒圓圈(紅) ----------------------------- */
+
+.login_head_img_box {
+  width: 60px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes scaleDraw {
+  /*定義關鍵幀、scaleDrew是需要繫結到選擇器的關鍵幀名稱*/
+  0% {
+    transform: scale(1);
+    /*開始為原始大小*/
+  }
+
+  25% {
+    transform: scale(1.2);
+    /*放大1.1倍*/
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.2);
+  }
+}
+
+.remind_circle_icon {
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 55px;
+  color: rgb(255, 90, 41);
+  -webkit-animation-name: scaleDraw;
+  /*關鍵幀名稱*/
+  -webkit-animation-timing-function: ease-in-out;
+  /*動畫的速度曲線*/
+  -webkit-animation-iteration-count: infinite;
+  /*動畫播放的次數*/
+  -webkit-animation-duration: 3s;
+  /*動畫所花費的時間*/
+}
+
+.remind_hidden {
+  display: none;
+}
+
+.remind_hidden_menu {
+  display: none;
+}
+
+.remind_circle_icon_open {
+  position: absolute;
+  font-size: 1.2rem;
+  top: 11.8rem;
+  right: 20px;
+  color: rgb(255, 90, 41);
+  -webkit-animation-name: scaleDraw;
+  /*關鍵幀名稱*/
+  -webkit-animation-timing-function: ease-in-out;
+  /*動畫的速度曲線*/
+  -webkit-animation-iteration-count: infinite;
+  /*動畫播放的次數*/
+  -webkit-animation-duration: 3s;
+  /*動畫所花費的時間*/
+}
+
+.remind_circle_icon_close {
+  position: absolute;
+  font-size: 1.2rem;
+  top: 3.5rem;
+  right: 3.5rem;
+  color: rgb(255, 90, 41);
+  -webkit-animation-name: scaleDraw;
+  /*關鍵幀名稱*/
+  -webkit-animation-timing-function: ease-in-out;
+  /*動畫的速度曲線*/
+  -webkit-animation-iteration-count: infinite;
+  /*動畫播放的次數*/
+  -webkit-animation-duration: 3s;
+  /*動畫所花費的時間*/
+}
+
+.remind_circle_icon_menu {
+  position: absolute;
+  font-size: 1.1rem;
+  top: 1.75rem;
+  right: 1.8rem;
+  color: rgb(255, 90, 41);
+  -webkit-animation-name: scaleDraw;
+  /*關鍵幀名稱*/
+  -webkit-animation-timing-function: ease-in-out;
+  /*動畫的速度曲線*/
+  -webkit-animation-iteration-count: infinite;
+  /*動畫播放的次數*/
+  -webkit-animation-duration: 3s;
+  /*動畫所花費的時間*/
+}
+
+/* ----------------------------- RWD導覽列收縮 ----------------------------- */
+
+.hamburger-icon {
+  margin: auto 0;
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-icon div {
+  background-color: var(--body_background_color);
+  transition: 0.4s;
+}
+
+.mobile_activity {
+  border: 3px solid #f7c242;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--body_color);
+}
+
+.mobile_activity:hover {
+  background-color: #f7c242;
+  color: black;
+  transition: 0.4s;
+}
+
+.menubtn {
+  font-size: 24px;
+  color: var(--body_color);
+}
+
+.underline {
+  box-shadow: 0 0.1rem;
+  padding-bottom: 2px;
+}
+
+.underline:hover {
+  color: #f7c242;
+}
+
+.open .mobile-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: 0.4s;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 150px;
+  background-color: var(--body_background_color);
+  border-radius: 0px 0px 0px 20px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 配合React */
+.mobile-menu.open {
+  display: block;
+}
+
+.mobile-menu li {
+  margin-bottom: 10px;
+}
+
+.mobile-li {
+  font-size: 2rem;
+  width: 130px;
+}
+
+/* ----------- login page ----------- */
+
+.profilePage_box {
+  margin: auto 0;
+  cursor: pointer;
+}
+
+.open .mobile-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: 0.4s;
+}
+
+.mobile-login.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-login {
+  display: none;
+  top: 80px;
+  position: absolute;
+  right: 0;
+  width: 200px;
+  background-color: var(--body_background_color);
+  border-radius: 0px 0px 0px 20px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1);
+}
+
+.profile-li {
+  padding: 20px;
+  color: var(--body_color);
+  font-size: 1rem;
+}
+
+.profile-li a:hover {
+  color: #f7c242;
+}
+
+.login_head_img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* ------------------- RWD -------------------- */
+
+@media screen and (max-width: 890px) {
+  .allUl_li {
+    display: none;
+  }
+
+  .home_user {
+    display: none;
+  }
+
+  .profilePage_box {
+    display: none;
+  }
+
+  .home_activity {
+    display: none;
+  }
+
+  .hamburger-icon {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

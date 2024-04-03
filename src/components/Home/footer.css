@@ -1,0 +1,13 @@
+/* ----------------------------- footer ----------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer {
+  height: 250px;
+  background-color: #f7c242;
+}
