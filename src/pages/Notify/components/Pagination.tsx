@@ -7,12 +7,13 @@ import { PaginationControllerType } from '../Types';
 
 function PaginationController({
   currentPage,
-  handleChangePage
+  handleChangePage,
+  pageCount
 }: PaginationControllerType) {
   return (
     <Stack spacing={2}>
       <Typography>Page: {currentPage}</Typography>
-      <Pagination count={10} page={currentPage} onChange={handleChangePage} />
+      <Pagination count={pageCount} page={currentPage} onChange={handleChangePage} />
     </Stack>
   );
 }

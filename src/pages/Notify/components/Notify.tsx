@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PaginationController from './Pagination'; 
 import '../styles/notify.scss';
+import { notifyData } from '../Types';
 
 function Notify() {
   const [notifications, setNotifications] = useState([]);
   const [currentType, setCurrentType] = useState('活動');
   const [current, setCurrent] = useState(1);
-  const [perPage, setPerPage] = useState(15);
+  const [perPage, setPerPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    const notifyData = [
+    const notifyData:notifyData[] = [
       { id: '1', type: '活動', state: '已通過' },
       { id: '2', type: '活動', state: '未通過' },
       { id: '3', type: '帳號', state: '未通過' },
@@ -22,16 +24,21 @@ function Notify() {
 
   const getData = () => {
     return notifications
-      .filter(notify => notify.type === currentType)
+      .filter((notify:notifyData) => notify.type === currentType)
       .slice((current - 1) * perPage, current * perPage);
   };
 
-  const handleChangeType = (type) => {
+  useEffect(() => {
+    const total = notifications.filter((notify:notifyData) => notify.type === currentType).length;
+    setPageCount(Math.ceil(total / perPage));
+  }, [notifications, currentType, perPage]);
+
+  const handleChangeType = (type:string) => {
     setCurrentType(type);
     setCurrent(1);
   };
 
-  const handleChangePage = (event, value) => {
+  const handleChangePage = (event:unknown, value:number) => {
     setCurrent(value);
   };
 
@@ -68,7 +75,7 @@ function Notify() {
                 </tr>
               </thead>
               <tbody className="notify_tbody">
-                {getData().map((notify) => (
+                {getData().map((notify:notifyData) => (
                   <tr key={notify.id}>
                     <td className={notify.state.includes('未通過') ? 'notify_tbody_border_RED' : 'notify_tbody_border'}>
                       {notify.state}
@@ -80,7 +87,7 @@ function Notify() {
           </div>
         </div>
       </div>
-      <PaginationController currentPage={current} handleChangePage={handleChangePage} />
+      <PaginationController currentPage={current} handleChangePage={handleChangePage} pageCount={pageCount} />
     </div>
   );
 }
