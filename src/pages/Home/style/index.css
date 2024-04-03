@@ -70,9 +70,10 @@ main {
 /* Next & previous buttons */
 .prev,
 .next {
+  z-index: 1;
   cursor: pointer;
   position: absolute;
-  top: 45%;
+  top: 30%;
   width: auto;
   margin-top: -1.5rem;
   padding: 0.5rem;

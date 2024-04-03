@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../style/index.css";
-import axios from "@/api/axios";
+import useFilterActivities from "../hooks/useFilterActivities";
+import SwiperComponent from "./swiper";
 
 import taipei101 from "@/assets/image/taipei-101.jpg";
 import newTaipei from "@/assets/image/new-taipei.jpg";
@@ -9,113 +10,90 @@ import tainan from "@/assets/image/台南.jpg";
 import taoyuan from "@/assets/image/桃園.jpg";
 import kaohsiung from "@/assets/image/高雄.jpg";
 
-// 輪播圖
 import slide1 from "@/assets/image/03.jpg";
 import slide2 from "@/assets/image/02.jpg";
-import slide3 from "@/assets/image/01.jpg";
 
 function Main() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [activities, setActivities] = useState([]);
-  const [filterByLocation, setFilterByLocation] = useState("");
-  const [filteredActivities, setFilteredActivities] = useState("");
+  const { filterByLocation, filteredActivities, handleFilterClick } =
+    useFilterActivities();
+  const [activities, setActivities] = useState<Activity[]>([]);
 
+  interface Activity {
+    activityId: number;
+    activityName: string;
+    activityPlace: string;
+    activityPartyTime: string;
+    name: string;
+    activityImage: string;
+    movie: number;
+    sports: number;
+    boardGame: number;
+    dineTogether: number;
+  }
+
+  // 若後端有資料可以從這邊拿
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
-
-  const nextSlide = () => {
-    if (currentSlide === 2) {
-      setCurrentSlide(0);
-    } else {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentSlide === 0) {
-      setCurrentSlide(2);
-    } else {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-
-  useEffect(() => {
-    async function getActivity() {
-      try {
-        const response = await axios.get("api/OrganizeActivity");
-        console.log(response.data);
-        setActivities(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getActivity();
+    setActivities([
+      {
+        activityId: 1,
+        activityName: "讀書會",
+        activityPlace: "台北",
+        activityPartyTime: "2024-04-15",
+        name: "Jett",
+        activityImage: slide1,
+        movie: 0,
+        sports: 0,
+        boardGame: 0,
+        dineTogether: 0,
+      },
+      {
+        activityId: 2,
+        activityName: "POE大賽",
+        activityPlace: "高雄",
+        activityPartyTime: "2024-04-15",
+        name: "Oscar",
+        activityImage: slide2,
+        movie: 1,
+        sports: 0,
+        boardGame: 0,
+        dineTogether: 0,
+      },
+    ]);
   }, []);
-
-  const handleFilterClick = (location) => {
-    const filtered = activities.filter((activity) =>
-      activity.activity_place.includes(location)
-    );
-    setFilterByLocation(location);
-    setFilteredActivities(filtered);
-  };
 
   const activitiesToShow = filterByLocation ? filteredActivities : activities;
 
+  // 搜尋功能
+  const handleClick = (location: string) => {
+    handleFilterClick(location, activities);
+  };
+
   return (
     <main className="main_pages_j">
-      <section className="carousel">
-        <div className="slideshow-container">
-          <div className={`mySlides fade ${currentSlide === 0 ? "show" : ""}`}>
-            <img src={slide1} alt="Slide 1" />
-          </div>
-          <div className={`mySlides fade ${currentSlide === 1 ? "show" : ""}`}>
-            <img src={slide2} alt="Slide 1" />
-          </div>
-          <div className={`mySlides fade ${currentSlide === 2 ? "show" : ""}`}>
-            <img src={slide3} alt="Slide 1" />
-          </div>
-          <div className="test" style={{ textAlign: "center" }}>
-            <span className="dot" onClick={() => setCurrentSlide(0)} />
-            <span className="dot" onClick={() => setCurrentSlide(1)} />
-            <span className="dot" onClick={() => setCurrentSlide(2)} />
-          </div>
-          <button className="prev" onClick={prevSlide}>
-            &#10094;
-          </button>
-          <button className="next" onClick={nextSlide}>
-            &#10095;
-          </button>
-        </div>
-      </section>
-
+      <SwiperComponent />
       <h1 className="hottitle">熱門地點</h1>
       <section className="hotbox">
-        <button className="hotplace" onClick={() => handleFilterClick("台北")}>
+        <button className="hotplace" onClick={() => handleClick("台北")}>
           <img className="hotimg" src={taipei101} alt="" />
           <div className="hottext">台北</div>
         </button>
-        <button className="hotplace" onClick={() => handleFilterClick("新北")}>
+        <button className="hotplace" onClick={() => handleClick("新北")}>
           <img className="hotimg" src={newTaipei} alt="" />
           <div className="hottext">新北</div>
         </button>
-        <button className="hotplace" onClick={() => handleFilterClick("桃園")}>
+        <button className="hotplace" onClick={() => handleClick("桃園")}>
           <img className="hotimg" src={taoyuan} alt="" />
           <div className="hottext">桃園</div>
         </button>
-        <button className="hotplace" onClick={() => handleFilterClick("台中")}>
+        <button className="hotplace" onClick={() => handleClick("台中")}>
           <img className="hotimg" src={taichung} alt="" />
           <div className="hottext">台中</div>
         </button>
-        <button className="hotplace" onClick={() => handleFilterClick("台南")}>
+        <button className="hotplace" onClick={() => handleClick("台南")}>
           <img className="hotimg" src={tainan} alt="" />
           <div className="hottext">台南</div>
         </button>
-        <button className="hotplace" onClick={() => handleFilterClick("高雄")}>
+        <button className="hotplace" onClick={() => handleClick("高雄")}>
           <img className="hotimg" src={kaohsiung} alt="" />
           <div className="hottext">高雄</div>
         </button>
@@ -128,7 +106,7 @@ function Main() {
             className="tabs_radio"
             name="tabs-example"
             id="tab0"
-            defaultChecked="true"
+            defaultChecked={true}
           />
           <label htmlFor="tab0" className="tabs_label">
             全部
@@ -140,21 +118,21 @@ function Main() {
                   return (
                     <a
                       className="grid-item"
-                      href={`/event/${activity.activity_id}`}
-                      key={activity.activity_id}
+                      href={`/event/${activity.activityId}`}
+                      key={activity.activityId}
                     >
                       <img
                         className="grid-img"
-                        src={activity.activity_image}
+                        src={activity.activityImage}
                         alt=""
                       />
                       <div className="grid-text">
-                        <h6>主題:{activity.activity_name}</h6>
+                        <h6>主題:{activity.activityName}</h6>
                         <span className="grid_text_txt">
-                          地點:{activity.activity_place}
+                          地點:{activity.activityPlace}
                         </span>
                         <span className="grid_text_txt">
-                          時間:{activity.activity_partyTime}
+                          時間:{activity.activityPartyTime}
                         </span>
                         <span className="grid_text_txt">
                           創建人:{activity.name}
@@ -183,21 +161,21 @@ function Main() {
                     return (
                       <a
                         className="grid-item"
-                        href={`/event/${activity.activity_id}`}
-                        key={activity.activity_id}
+                        href={`/event/${activity.activityId}`}
+                        key={activity.activityId}
                       >
                         <img
                           className="grid-img"
-                          src={activity.activity_image}
+                          src={activity.activityImage}
                           alt=""
                         />
                         <div className="grid-text">
-                          <h6>主題:{activity.activity_name}</h6>
+                          <h6>主題:{activity.activityName}</h6>
                           <span className="grid_text_txt">
-                            地點:{activity.activity_place}
+                            地點:{activity.activityPlace}
                           </span>
                           <span className="grid_text_txt">
-                            時間:{activity.activity_partyTime}
+                            時間:{activity.activityPartyTime}
                           </span>
                           <span className="grid_text_txt">
                             會員:{activity.name}
@@ -230,21 +208,21 @@ function Main() {
                     return (
                       <a
                         className="grid-item"
-                        href={`/event/${activity.activity_id}`}
-                        key={activity.activity_id}
+                        href={`/event/${activity.activityId}`}
+                        key={activity.activityId}
                       >
                         <img
                           className="grid-img"
-                          src={activity.activity_image}
+                          src={activity.activityImage}
                           alt=""
                         />
                         <div className="grid-text">
-                          <h6>主題:{activity.activity_name}</h6>
+                          <h6>主題:{activity.activityName}</h6>
                           <span className="grid_text_txt">
-                            地點:{activity.activity_place}
+                            地點:{activity.activityPlace}
                           </span>
                           <span className="grid_text_txt">
-                            時間:{activity.activity_partyTime}
+                            時間:{activity.activityPartyTime}
                           </span>
                           <span className="grid_text_txt">
                             創建人:{activity.name}
@@ -273,25 +251,25 @@ function Main() {
             <div className="grid-box">
               <div className="grid-container">
                 {activitiesToShow.map((activity) => {
-                  if (activity.board_game === 1) {
+                  if (activity.boardGame === 1) {
                     return (
                       <a
                         className="grid-item"
-                        href={`/event/${activity.activity_id}`}
-                        key={activity.activity_id}
+                        href={`/event/${activity.activityId}`}
+                        key={activity.activityId}
                       >
                         <img
                           className="grid-img"
-                          src={activity.activity_image}
+                          src={activity.activityImage}
                           alt=""
                         />
                         <div className="grid-text">
-                          <h6>主題:{activity.activity_name}</h6>
+                          <h6>主題:{activity.activityName}</h6>
                           <span className="grid_text_txt">
-                            地點:{activity.activity_place}
+                            地點:{activity.activityPlace}
                           </span>
                           <span className="grid_text_txt">
-                            時間:{activity.activity_partyTime}
+                            時間:{activity.activityPartyTime}
                           </span>
                           <span className="grid_text_txt">
                             會員:{activity.name}
@@ -320,25 +298,25 @@ function Main() {
             <div className="grid-box">
               <div className="grid-container">
                 {activitiesToShow.map((activity) => {
-                  if (activity.dine_together === 1) {
+                  if (activity.dineTogether === 1) {
                     return (
                       <a
                         className="grid-item"
-                        href={`/event/${activity.activity_id}`}
-                        key={activity.activity_id}
+                        href={`/event/${activity.activityId}`}
+                        key={activity.activityId}
                       >
                         <img
                           className="grid-img"
-                          src={activity.activity_image}
+                          src={activity.activityImage}
                           alt=""
                         />
                         <div className="grid-text">
-                          <h6>主題:{activity.activity_name}</h6>
+                          <h6>主題:{activity.activityName}</h6>
                           <span className="grid_text_txt">
-                            地點:{activity.activity_place}
+                            地點:{activity.activityPlace}
                           </span>
                           <span className="grid_text_txt">
-                            時間:{activity.activity_partyTime}
+                            時間:{activity.activityPartyTime}
                           </span>
                           <span className="grid_text_txt">
                             會員:{activity.name}
@@ -370,27 +348,27 @@ function Main() {
                   if (
                     activity.movie === 0 &&
                     activity.sports === 0 &&
-                    activity.board_game === 0 &&
-                    activity.dine_together === 0
+                    activity.boardGame === 0 &&
+                    activity.dineTogether === 0
                   ) {
                     return (
                       <a
                         className="grid-item"
-                        href={`/event/${activity.activity_id}`}
-                        key={activity.activity_id}
+                        href={`/event/${activity.activityId}`}
+                        key={activity.activityId}
                       >
                         <img
                           className="grid-img"
-                          src={activity.activity_image}
+                          src={activity.activityImage}
                           alt=""
                         />
                         <div className="grid-text">
-                          <h6>主題:{activity.activity_name}</h6>
+                          <h6>主題:{activity.activityName}</h6>
                           <span className="grid_text_txt">
-                            地點:{activity.activity_place}
+                            地點:{activity.activityPlace}
                           </span>
                           <span className="grid_text_txt">
-                            時間:{activity.activity_partyTime}
+                            時間:{activity.activityPartyTime}
                           </span>
                           <span className="grid_text_txt">
                             會員:{activity.name}
